@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>आवेदन पत्र</title>
+    <style>
+        body {
+            font-family: 'Mangal', Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            margin: auto;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+        .right {
+            text-align: right;
+        }
+        .print-area {
+            border: 1px solid #000;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: white;
+        }
+        .btn {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .btn-print {
+            background-color: #007bff;
+        }
+        @media print {
+            .btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- <h2>आवेदन पत्र</h2> -->
+    <form id="leaveForm">
+        <h2>आवेदन पत्र</h2>
+        <label>नाम:</label>
+        <input type="text" id="name" required>
+        
+        <label>पद:</label>
+        <input type="text" id="post" required>
+
+        <label>कार्यस्थल/Group </label>
+        <input type="text" id="group" placeholder="जैसे:  पाली A/B/C/D/General " required>
+
+        <label>SAP ID:</label>
+        <input type="text" id="sapid" required>
+
+        <label>अवकाश तिथि:</label>
+        <input type="text" id="leaveDate" placeholder="जैसे: 11 एवं 12 मार्च 2025" required>
+
+        <label>आवेदन दिनांक:</label>
+        <input type="text" id="appDate" placeholder="जैसे: 09 मार्च 2025" required>
+
+        <button type="button" class="btn" onclick="generateApplication()">आवेदन देखें</button>
+    </form>
+
+    <div id="applicationPreview" class="print-area hidden">
+        <p><strong>सेवा में,</strong><br>
+        &nbsp;अधिशासी अभियंता,<br>
+        &nbsp;सी एंड आई एमडी-I,<br>
+        &nbsp;हरदुआगंज तापीय परियोजना,<br>
+        &nbsp;उत्तर प्रदेश राज्य विद्युत उत्पादन निगम लिमिटेड।</p>
+
+        <p><strong>विषय:</strong> आकस्मिक अवकाश (CL) स्वीकृत करने हेतु आवेदन।</p>
+
+        <p>महोदय,</p>
+        <p>नम्र निवेदन है कि मैं <span id="applicantName"></span>, <span id="applicantPost"></span>, हरदुआगंज तापीय परियोजना में कार्यरत हूँ। मुझे दिनांक <span id="applicantLeaveDate"></span> को व्यक्तिगत कारणों से आकस्मिक अवकाश (CL) की आवश्यकता है।</p>
+        <p>अतः आपसे अनुरोध है कि उपरोक्त दिनांक को मुझे दो दिन का आकस्मिक अवकाश स्वीकृत करने की कृपा करें।</p>
+        <p>आवेदन दिनांक: <span id="applicationDate"></span></p>
+
+        <div class="right">
+            <p>भवदीय,</p>
+            <p><strong><span id="applicantNameRight"></span></strong></p>
+            <p>पद : <span id="applicantPostRight"></span></p>
+            <p>कार्यस्थल/Group :  <span id="applicantGroupRight"></span></p>
+            <p>SAP ID: <span id="applicantSAP"></span></p>
+        </div>
+
+        <button class="btn btn-print" onclick="window.print()">🖨️ प्रिंट करें</button>
+    </div>
+</div>
+
+<script>
+    function generateApplication() {
+        document.getElementById("applicantName").textContent = document.getElementById("name").value;
+        document.getElementById("applicantPost").textContent = document.getElementById("post").value;
+        document.getElementById("applicantGroup").textContent = document.getElementById("group").value;
+        document.getElementById("applicantLeaveDate").textContent = document.getElementById("leaveDate").value;
+        document.getElementById("applicantSAP").textContent = document.getElementById("sapid").value;
+        document.getElementById("applicationDate").textContent = document.getElementById("appDate").value;
+
+        document.getElementById("applicantNameRight").textContent = document.getElementById("name").value;
+        document.getElementById("applicantPostRight").textContent = document.getElementById("post").value;
+        document.getElementById("applicantGroupRight").textContent = document.getElementById("group").value;
+
+        document.getElementById("leaveForm").classList.add("hidden");
+        document.getElementById("applicationPreview").classList.remove("hidden");
+    }
+</script>
+
+</body>
+</html>
